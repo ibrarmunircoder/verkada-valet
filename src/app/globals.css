@@ -16,14 +16,19 @@
   }
 }
 
+* {
+  @apply p-0 m-0 box-border;
+}
+
+@layer base {
+  html,
+  body {
+    @apply w-full min-h-screen;
+  }
+}
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
