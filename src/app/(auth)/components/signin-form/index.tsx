@@ -1,10 +1,10 @@
 'use client';
 
-import { Alert, Button, Input, useAuthenticator } from '@aws-amplify/ui-react';
+import { Alert, Button, Input } from '@aws-amplify/ui-react';
 import { useSigninForm } from './hooks/useSigninForm';
-import { isError, isErrorMessage } from '@/shared/utils';
+import { isError, isErrorMessage } from '@/app/shared/utils';
 import { Controller } from 'react-hook-form';
-import { ErrorHelperMessage } from '@/shared/components';
+import { ErrorHelperMessage } from '@/app/components';
 import Link from 'next/link';
 import '@aws-amplify/ui-react/styles.css';
 
@@ -13,10 +13,6 @@ export const SigninForm = ({
 }: {
   parent: 'users' | 'organizations';
 }) => {
-  const { authStatus, user } = useAuthenticator((context) => [
-    context.authStatus,
-    context.user,
-  ]);
   const {
     control,
     errors,
@@ -26,10 +22,6 @@ export const SigninForm = ({
     error,
     handleCloseError,
   } = useSigninForm();
-
-  //   if (authStatus === 'authenticated' && user) {
-  //     return <Navigate to="/add-facilities" replace />;
-  //   }
 
   return (
     <main className="w-full min-h-screen flex justify-center items-center p-3">

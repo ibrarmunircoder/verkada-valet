@@ -1,7 +1,11 @@
-'use client';
+import { SignupSteps } from './components/SignupSteps';
 
 const Signup = () => {
-  return <div>Sign up</div>;
+  return (
+    <main className="w-full min-h-screen flex justify-center items-center p-3 py-12">
+      <SignupSteps />
+    </main>
+  );
 };
 
 export default Signup;

@@ -3,8 +3,10 @@ import { SignInFormInput, useSigninFormSchema } from './useSigninFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'aws-amplify/auth';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export const useSigninForm = () => {
+  const router = useRouter();
   const [error, setError] = useState('');
   const validationSchema = useSigninFormSchema();
   const {
@@ -22,7 +24,7 @@ export const useSigninForm = () => {
         username: values.email,
         password: values.password,
       });
-      window.location.href = '/add-facilities';
+      router.replace('/dashboard');
     } catch (error: any) {
       setError(error?.message || 'Invalid credentials');
       console.error(error);
