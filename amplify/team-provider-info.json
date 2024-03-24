@@ -1,0 +1,23 @@
+{
+  "production": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-verkadavalet-production-121857-authRole",
+      "UnauthRoleArn": "arn:aws:iam::992382791775:role/amplify-verkadavalet-production-121857-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::992382791775:role/amplify-verkadavalet-production-121857-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-verkadavalet-production-121857-deployment",
+      "UnauthRoleName": "amplify-verkadavalet-production-121857-unauthRole",
+      "StackName": "amplify-verkadavalet-production-121857",
+      "StackId": "arn:aws:cloudformation:us-east-2:992382791775:stack/amplify-verkadavalet-production-121857/cc934950-e9ae-11ee-9d02-06aacf3fce61",
+      "AmplifyAppId": "d3jil94hpjo1yg"
+    },
+    "categories": {
+      "auth": {
+        "verkadavalet48055ec348055ec3": {}
+      },
+      "api": {
+        "verkadavalet": {}
+      }
+    }
+  }
+}
