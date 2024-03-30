@@ -56,3 +56,54 @@ export const onDeleteUsers = /* GraphQL */ `subscription OnDeleteUsers($filter: 
   APITypes.OnDeleteUsersSubscriptionVariables,
   APITypes.OnDeleteUsersSubscription
 >;
+export const onCreateCars = /* GraphQL */ `subscription OnCreateCars($filter: ModelSubscriptionCarsFilterInput) {
+  onCreateCars(filter: $filter) {
+    licensePlateNum
+    userId
+    carMaker
+    carModel
+    color
+    year
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateCarsSubscriptionVariables,
+  APITypes.OnCreateCarsSubscription
+>;
+export const onUpdateCars = /* GraphQL */ `subscription OnUpdateCars($filter: ModelSubscriptionCarsFilterInput) {
+  onUpdateCars(filter: $filter) {
+    licensePlateNum
+    userId
+    carMaker
+    carModel
+    color
+    year
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateCarsSubscriptionVariables,
+  APITypes.OnUpdateCarsSubscription
+>;
+export const onDeleteCars = /* GraphQL */ `subscription OnDeleteCars($filter: ModelSubscriptionCarsFilterInput) {
+  onDeleteCars(filter: $filter) {
+    licensePlateNum
+    userId
+    carMaker
+    carModel
+    color
+    year
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteCarsSubscriptionVariables,
+  APITypes.OnDeleteCarsSubscription
+>;

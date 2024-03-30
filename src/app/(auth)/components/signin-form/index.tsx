@@ -13,6 +13,8 @@ export const SigninForm = ({
 }: {
   parent: 'users' | 'organizations';
 }) => {
+  const redirectTo =
+    parent === 'users' ? '/users/tickets' : '/organizations/tickets';
   const {
     control,
     errors,
@@ -21,7 +23,7 @@ export const SigninForm = ({
     touchedFields,
     error,
     handleCloseError,
-  } = useSigninForm();
+  } = useSigninForm(redirectTo);
 
   return (
     <main className="w-full min-h-screen flex justify-center items-center p-3">

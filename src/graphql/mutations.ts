@@ -65,3 +65,63 @@ export const deleteUsers = /* GraphQL */ `mutation DeleteUsers(
   APITypes.DeleteUsersMutationVariables,
   APITypes.DeleteUsersMutation
 >;
+export const createCars = /* GraphQL */ `mutation CreateCars(
+  $input: CreateCarsInput!
+  $condition: ModelCarsConditionInput
+) {
+  createCars(input: $input, condition: $condition) {
+    licensePlateNum
+    userId
+    carMaker
+    carModel
+    color
+    year
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateCarsMutationVariables,
+  APITypes.CreateCarsMutation
+>;
+export const updateCars = /* GraphQL */ `mutation UpdateCars(
+  $input: UpdateCarsInput!
+  $condition: ModelCarsConditionInput
+) {
+  updateCars(input: $input, condition: $condition) {
+    licensePlateNum
+    userId
+    carMaker
+    carModel
+    color
+    year
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateCarsMutationVariables,
+  APITypes.UpdateCarsMutation
+>;
+export const deleteCars = /* GraphQL */ `mutation DeleteCars(
+  $input: DeleteCarsInput!
+  $condition: ModelCarsConditionInput
+) {
+  deleteCars(input: $input, condition: $condition) {
+    licensePlateNum
+    userId
+    carMaker
+    carModel
+    color
+    year
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteCarsMutationVariables,
+  APITypes.DeleteCarsMutation
+>;

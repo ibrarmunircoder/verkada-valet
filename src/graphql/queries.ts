@@ -82,3 +82,80 @@ export const getUserByUserId = /* GraphQL */ `query GetUserByUserId(
   APITypes.GetUserByUserIdQueryVariables,
   APITypes.GetUserByUserIdQuery
 >;
+export const getCars = /* GraphQL */ `query GetCars($licensePlateNum: String!) {
+  getCars(licensePlateNum: $licensePlateNum) {
+    licensePlateNum
+    userId
+    carMaker
+    carModel
+    color
+    year
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetCarsQueryVariables, APITypes.GetCarsQuery>;
+export const listCars = /* GraphQL */ `query ListCars(
+  $licensePlateNum: String
+  $filter: ModelCarsFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listCars(
+    licensePlateNum: $licensePlateNum
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      licensePlateNum
+      userId
+      carMaker
+      carModel
+      color
+      year
+      created_at
+      updated_at
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.ListCarsQueryVariables, APITypes.ListCarsQuery>;
+export const getCarsByUserId = /* GraphQL */ `query GetCarsByUserId(
+  $userId: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelCarsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  getCarsByUserId(
+    userId: $userId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      licensePlateNum
+      userId
+      carMaker
+      carModel
+      color
+      year
+      created_at
+      updated_at
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetCarsByUserIdQueryVariables,
+  APITypes.GetCarsByUserIdQuery
+>;

@@ -5,7 +5,7 @@ import { signIn } from 'aws-amplify/auth';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export const useSigninForm = () => {
+export const useSigninForm = (redirectTo: string) => {
   const router = useRouter();
   const [error, setError] = useState('');
   const validationSchema = useSigninFormSchema();
@@ -24,7 +24,7 @@ export const useSigninForm = () => {
         username: values.email,
         password: values.password,
       });
-      router.replace('/dashboard');
+      router.replace(redirectTo);
     } catch (error: any) {
       setError(error?.message || 'Invalid credentials');
       console.error(error);

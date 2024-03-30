@@ -11,7 +11,7 @@ export const SignupSteps = () => {
   let currentForm = <SignupForm />;
 
   if (currentStep === AuthSteps.CONFIRM_SIGN_UP) {
-    currentForm = <ConfirmEmailForm />;
+    currentForm = <ConfirmEmailForm redirectTo="/users/tickets" />;
   }
   return currentForm;
 };

@@ -9,7 +9,7 @@ import { useAuthStep } from '@/app/(auth)/hooks/useAuthStep';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 
-export const useConfirmSignup = () => {
+export const useConfirmSignup = (redirectTo: string) => {
   const router = useRouter();
   const validationSchema = useConfirmSignupFormSchema();
   const {
@@ -39,7 +39,7 @@ export const useConfirmSignup = () => {
       });
       if (isSignUpComplete) {
         await autoSignIn();
-        router.replace('/dashboard');
+        router.replace(redirectTo);
       }
     } catch (error: any) {
       console.error(error);

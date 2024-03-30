@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ConfigureAmplifyClientSide from '@/app/ConfigureAmplifyClientSide';
+import { AuthenticatorProvider } from '@/app/context/AuthenticatorProvider';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
@@ -19,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ConfigureAmplifyClientSide />
-        {children}
+        <AuthenticatorProvider>{children}</AuthenticatorProvider>
       </body>
     </html>
   );

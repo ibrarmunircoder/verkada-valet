@@ -4,7 +4,7 @@ import { ErrorHelperMessage } from '@/app/components';
 import { isError, isErrorMessage } from '@/app/shared/utils';
 import { useConfirmSignup } from './hooks/useConfirmSignup';
 
-export const ConfirmEmailForm = () => {
+export const ConfirmEmailForm = ({ redirectTo }: { redirectTo: string }) => {
   const {
     control,
     errors,
@@ -12,7 +12,7 @@ export const ConfirmEmailForm = () => {
     touchedFields,
     onSubmit,
     handleResendCode,
-  } = useConfirmSignup();
+  } = useConfirmSignup(redirectTo);
   return (
     <div className="max-w-2xl w-full">
       <div className="border border-black p-5 py-10 shadow-md w-full md:w-3/4 mx-auto">

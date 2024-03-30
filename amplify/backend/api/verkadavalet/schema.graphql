@@ -17,6 +17,26 @@ type Users
   dob: String
 }
 
+type Cars
+  @model(timestamps: { createdAt: "created_at", updatedAt: "updated_at" })
+  @auth(
+    rules: [
+      { allow: public, operations: [read], provider: iam }
+      {
+        allow: private
+        operations: [create, update, delete, read]
+        provider: userPools
+      }
+    ]
+  ) {
+  licensePlateNum: String! @primaryKey
+  userId: String! @index(name: "byUserId", queryField: "getCarsByUserId")
+  carMaker: String!
+  carModel: String!
+  color: String!
+  year: Int!
+}
+
 enum UserRole {
   USER
   ORGANIZATION
