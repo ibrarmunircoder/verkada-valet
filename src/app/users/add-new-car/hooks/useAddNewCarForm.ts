@@ -1,12 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { AddNewCarFormInput, useAddNewCarSchema } from './useAddNewCarSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAuthenticator } from '@aws-amplify/ui-react';
 import Swal from 'sweetalert2';
 import { carService } from '@/app/shared/services/cars.service';
+import { getCurrentUser } from 'aws-amplify/auth';
 
 export const useAddNewCarForm = () => {
-  const { user } = useAuthenticator();
   const validationSchema = useAddNewCarSchema();
   const {
     handleSubmit,
@@ -33,6 +32,7 @@ export const useAddNewCarForm = () => {
       timer: 3000,
     });
     try {
+      const user = await getCurrentUser();
       await carService.addNewUserCar({
         ...values,
         year: +values.year,

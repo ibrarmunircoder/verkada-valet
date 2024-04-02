@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/verkada/webhook": {
+      "name": "/verkada/webhook",
+      "lambdaFunction": "verkadavalet747f2d4c",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

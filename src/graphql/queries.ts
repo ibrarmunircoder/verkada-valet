@@ -90,6 +90,10 @@ export const getCars = /* GraphQL */ `query GetCars($licensePlateNum: String!) {
     carModel
     color
     year
+    tickets {
+      nextToken
+      __typename
+    }
     created_at
     updated_at
     __typename
@@ -158,4 +162,170 @@ export const getCarsByUserId = /* GraphQL */ `query GetCarsByUserId(
 ` as GeneratedQuery<
   APITypes.GetCarsByUserIdQueryVariables,
   APITypes.GetCarsByUserIdQuery
+>;
+export const getCameras = /* GraphQL */ `query GetCameras($cameraId: String!) {
+  getCameras(cameraId: $cameraId) {
+    cameraId
+    userId
+    organizationName
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetCamerasQueryVariables,
+  APITypes.GetCamerasQuery
+>;
+export const listCameras = /* GraphQL */ `query ListCameras(
+  $cameraId: String
+  $filter: ModelCamerasFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listCameras(
+    cameraId: $cameraId
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      cameraId
+      userId
+      organizationName
+      created_at
+      updated_at
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListCamerasQueryVariables,
+  APITypes.ListCamerasQuery
+>;
+export const getCamerasByUserId = /* GraphQL */ `query GetCamerasByUserId(
+  $userId: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelCamerasFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  getCamerasByUserId(
+    userId: $userId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      cameraId
+      userId
+      organizationName
+      created_at
+      updated_at
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetCamerasByUserIdQueryVariables,
+  APITypes.GetCamerasByUserIdQuery
+>;
+export const getTickets = /* GraphQL */ `query GetTickets($id: ID!) {
+  getTickets(id: $id) {
+    ticketNum
+    cameraId
+    organizationName
+    licensePlateNum
+    car {
+      licensePlateNum
+      userId
+      carMaker
+      carModel
+      color
+      year
+      created_at
+      updated_at
+      __typename
+    }
+    status
+    checkIn
+    checkOut
+    id
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetTicketsQueryVariables,
+  APITypes.GetTicketsQuery
+>;
+export const listTickets = /* GraphQL */ `query ListTickets(
+  $filter: ModelTicketsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTickets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      ticketNum
+      cameraId
+      organizationName
+      licensePlateNum
+      status
+      checkIn
+      checkOut
+      id
+      created_at
+      updated_at
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListTicketsQueryVariables,
+  APITypes.ListTicketsQuery
+>;
+export const ticketsByLicensePlateNum = /* GraphQL */ `query TicketsByLicensePlateNum(
+  $licensePlateNum: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelTicketsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  ticketsByLicensePlateNum(
+    licensePlateNum: $licensePlateNum
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      ticketNum
+      cameraId
+      organizationName
+      licensePlateNum
+      status
+      checkIn
+      checkOut
+      id
+      created_at
+      updated_at
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.TicketsByLicensePlateNumQueryVariables,
+  APITypes.TicketsByLicensePlateNumQuery
 >;

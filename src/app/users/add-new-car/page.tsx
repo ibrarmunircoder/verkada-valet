@@ -3,18 +3,13 @@
 import React from 'react';
 import { useAddNewCarForm } from './hooks/useAddNewCarForm';
 import { Controller } from 'react-hook-form';
-import { Button, Input, useAuthenticator } from '@aws-amplify/ui-react';
+import { Button, Input } from '@aws-amplify/ui-react';
 import { isError, isErrorMessage } from '@/app/shared/utils';
-import { ErrorHelperMessage, Spinner } from '@/app/components';
+import { ErrorHelperMessage } from '@/app/components';
 
 const AddNewCar = () => {
-  const { authStatus } = useAuthenticator();
   const { control, errors, isSubmitting, onSubmit, touchedFields } =
     useAddNewCarForm();
-
-  if (authStatus === 'configuring') {
-    return <Spinner />;
-  }
 
   return (
     <main className="w-full min-h-screen flex justify-center p-3">

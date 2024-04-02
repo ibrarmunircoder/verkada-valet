@@ -76,6 +76,10 @@ export const createCars = /* GraphQL */ `mutation CreateCars(
     carModel
     color
     year
+    tickets {
+      nextToken
+      __typename
+    }
     created_at
     updated_at
     __typename
@@ -96,6 +100,10 @@ export const updateCars = /* GraphQL */ `mutation UpdateCars(
     carModel
     color
     year
+    tickets {
+      nextToken
+      __typename
+    }
     created_at
     updated_at
     __typename
@@ -116,6 +124,10 @@ export const deleteCars = /* GraphQL */ `mutation DeleteCars(
     carModel
     color
     year
+    tickets {
+      nextToken
+      __typename
+    }
     created_at
     updated_at
     __typename
@@ -124,4 +136,154 @@ export const deleteCars = /* GraphQL */ `mutation DeleteCars(
 ` as GeneratedMutation<
   APITypes.DeleteCarsMutationVariables,
   APITypes.DeleteCarsMutation
+>;
+export const createCameras = /* GraphQL */ `mutation CreateCameras(
+  $input: CreateCamerasInput!
+  $condition: ModelCamerasConditionInput
+) {
+  createCameras(input: $input, condition: $condition) {
+    cameraId
+    userId
+    organizationName
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateCamerasMutationVariables,
+  APITypes.CreateCamerasMutation
+>;
+export const updateCameras = /* GraphQL */ `mutation UpdateCameras(
+  $input: UpdateCamerasInput!
+  $condition: ModelCamerasConditionInput
+) {
+  updateCameras(input: $input, condition: $condition) {
+    cameraId
+    userId
+    organizationName
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateCamerasMutationVariables,
+  APITypes.UpdateCamerasMutation
+>;
+export const deleteCameras = /* GraphQL */ `mutation DeleteCameras(
+  $input: DeleteCamerasInput!
+  $condition: ModelCamerasConditionInput
+) {
+  deleteCameras(input: $input, condition: $condition) {
+    cameraId
+    userId
+    organizationName
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteCamerasMutationVariables,
+  APITypes.DeleteCamerasMutation
+>;
+export const createTickets = /* GraphQL */ `mutation CreateTickets(
+  $input: CreateTicketsInput!
+  $condition: ModelTicketsConditionInput
+) {
+  createTickets(input: $input, condition: $condition) {
+    ticketNum
+    cameraId
+    organizationName
+    licensePlateNum
+    car {
+      licensePlateNum
+      userId
+      carMaker
+      carModel
+      color
+      year
+      created_at
+      updated_at
+      __typename
+    }
+    status
+    checkIn
+    checkOut
+    id
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateTicketsMutationVariables,
+  APITypes.CreateTicketsMutation
+>;
+export const updateTickets = /* GraphQL */ `mutation UpdateTickets(
+  $input: UpdateTicketsInput!
+  $condition: ModelTicketsConditionInput
+) {
+  updateTickets(input: $input, condition: $condition) {
+    ticketNum
+    cameraId
+    organizationName
+    licensePlateNum
+    car {
+      licensePlateNum
+      userId
+      carMaker
+      carModel
+      color
+      year
+      created_at
+      updated_at
+      __typename
+    }
+    status
+    checkIn
+    checkOut
+    id
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateTicketsMutationVariables,
+  APITypes.UpdateTicketsMutation
+>;
+export const deleteTickets = /* GraphQL */ `mutation DeleteTickets(
+  $input: DeleteTicketsInput!
+  $condition: ModelTicketsConditionInput
+) {
+  deleteTickets(input: $input, condition: $condition) {
+    ticketNum
+    cameraId
+    organizationName
+    licensePlateNum
+    car {
+      licensePlateNum
+      userId
+      carMaker
+      carModel
+      color
+      year
+      created_at
+      updated_at
+      __typename
+    }
+    status
+    checkIn
+    checkOut
+    id
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteTicketsMutationVariables,
+  APITypes.DeleteTicketsMutation
 >;

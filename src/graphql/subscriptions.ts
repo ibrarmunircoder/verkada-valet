@@ -64,6 +64,10 @@ export const onCreateCars = /* GraphQL */ `subscription OnCreateCars($filter: Mo
     carModel
     color
     year
+    tickets {
+      nextToken
+      __typename
+    }
     created_at
     updated_at
     __typename
@@ -81,6 +85,10 @@ export const onUpdateCars = /* GraphQL */ `subscription OnUpdateCars($filter: Mo
     carModel
     color
     year
+    tickets {
+      nextToken
+      __typename
+    }
     created_at
     updated_at
     __typename
@@ -98,6 +106,10 @@ export const onDeleteCars = /* GraphQL */ `subscription OnDeleteCars($filter: Mo
     carModel
     color
     year
+    tickets {
+      nextToken
+      __typename
+    }
     created_at
     updated_at
     __typename
@@ -106,4 +118,136 @@ export const onDeleteCars = /* GraphQL */ `subscription OnDeleteCars($filter: Mo
 ` as GeneratedSubscription<
   APITypes.OnDeleteCarsSubscriptionVariables,
   APITypes.OnDeleteCarsSubscription
+>;
+export const onCreateCameras = /* GraphQL */ `subscription OnCreateCameras($filter: ModelSubscriptionCamerasFilterInput) {
+  onCreateCameras(filter: $filter) {
+    cameraId
+    userId
+    organizationName
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateCamerasSubscriptionVariables,
+  APITypes.OnCreateCamerasSubscription
+>;
+export const onUpdateCameras = /* GraphQL */ `subscription OnUpdateCameras($filter: ModelSubscriptionCamerasFilterInput) {
+  onUpdateCameras(filter: $filter) {
+    cameraId
+    userId
+    organizationName
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateCamerasSubscriptionVariables,
+  APITypes.OnUpdateCamerasSubscription
+>;
+export const onDeleteCameras = /* GraphQL */ `subscription OnDeleteCameras($filter: ModelSubscriptionCamerasFilterInput) {
+  onDeleteCameras(filter: $filter) {
+    cameraId
+    userId
+    organizationName
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteCamerasSubscriptionVariables,
+  APITypes.OnDeleteCamerasSubscription
+>;
+export const onCreateTickets = /* GraphQL */ `subscription OnCreateTickets($filter: ModelSubscriptionTicketsFilterInput) {
+  onCreateTickets(filter: $filter) {
+    ticketNum
+    cameraId
+    organizationName
+    licensePlateNum
+    car {
+      licensePlateNum
+      userId
+      carMaker
+      carModel
+      color
+      year
+      created_at
+      updated_at
+      __typename
+    }
+    status
+    checkIn
+    checkOut
+    id
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateTicketsSubscriptionVariables,
+  APITypes.OnCreateTicketsSubscription
+>;
+export const onUpdateTickets = /* GraphQL */ `subscription OnUpdateTickets($filter: ModelSubscriptionTicketsFilterInput) {
+  onUpdateTickets(filter: $filter) {
+    ticketNum
+    cameraId
+    organizationName
+    licensePlateNum
+    car {
+      licensePlateNum
+      userId
+      carMaker
+      carModel
+      color
+      year
+      created_at
+      updated_at
+      __typename
+    }
+    status
+    checkIn
+    checkOut
+    id
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateTicketsSubscriptionVariables,
+  APITypes.OnUpdateTicketsSubscription
+>;
+export const onDeleteTickets = /* GraphQL */ `subscription OnDeleteTickets($filter: ModelSubscriptionTicketsFilterInput) {
+  onDeleteTickets(filter: $filter) {
+    ticketNum
+    cameraId
+    organizationName
+    licensePlateNum
+    car {
+      licensePlateNum
+      userId
+      carMaker
+      carModel
+      color
+      year
+      created_at
+      updated_at
+      __typename
+    }
+    status
+    checkIn
+    checkOut
+    id
+    created_at
+    updated_at
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteTicketsSubscriptionVariables,
+  APITypes.OnDeleteTicketsSubscription
 >;

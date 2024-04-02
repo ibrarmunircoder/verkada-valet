@@ -1,5 +1,19 @@
 {
   "api": {
+    "api36dac541": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "verkadavalet747f2d4c"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "verkadavalet": {
       "dependsOn": [
         {
@@ -55,6 +69,41 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "verkadavalet747f2d4c": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "verkadavalet"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_verkadavalet747f2d4c_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "verkadavalet747f2d4c"
+        }
+      ]
+    },
+    "AMPLIFY_function_verkadavalet747f2d4c_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "verkadavalet747f2d4c"
+        }
+      ]
     }
   }
 }

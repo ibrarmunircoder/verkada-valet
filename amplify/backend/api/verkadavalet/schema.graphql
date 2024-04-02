@@ -35,6 +35,54 @@ type Cars
   carModel: String!
   color: String!
   year: Int!
+  tickets: [Tickets!]!
+    @hasMany(indexName: "byCarLicensePlateNum", fields: ["licensePlateNum"])
+}
+
+type Cameras
+  @model(timestamps: { createdAt: "created_at", updatedAt: "updated_at" })
+  @auth(
+    rules: [
+      { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
+      {
+        allow: private
+        operations: [create, update, delete, read]
+        provider: userPools
+      }
+    ]
+  ) {
+  cameraId: String! @primaryKey
+  userId: String! @index(name: "byUserId", queryField: "getCamerasByUserId")
+  organizationName: String!
+}
+
+type Tickets
+  @model(timestamps: { createdAt: "created_at", updatedAt: "updated_at" })
+  @auth(
+    rules: [
+      { allow: public, operations: [read, create], provider: iam }
+      { allow: private, operations: [read, create], provider: iam }
+      {
+        allow: private
+        operations: [create, update, delete, read]
+        provider: userPools
+      }
+    ]
+  ) {
+  ticketNum: String!
+  cameraId: String!
+  organizationName: String!
+  licensePlateNum: String! @index(name: "byCarLicensePlateNum")
+  car: Cars @belongsTo(fields: ["licensePlateNum"])
+  status: TicketStatus!
+  checkIn: AWSDateTime
+  checkOut: AWSDateTime
+}
+
+enum TicketStatus {
+  IN_PARKING
+  PICKEDUP
 }
 
 enum UserRole {
