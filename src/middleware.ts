@@ -1,8 +1,11 @@
 import { fetchAuthSession } from 'aws-amplify/auth/server';
 import { NextRequest, NextResponse } from 'next/server';
-import { runWithAmplifyServerContext } from '@/app/amplify-server';
-import { fetchUserByUserId } from '@/app/actions/user.actions';
+import {
+  reqResBasedClient,
+  runWithAmplifyServerContext,
+} from '@/app/amplify-server';
 import { UserRole } from '@/API';
+import { getUserByUserId } from './graphql/queries';
 
 const authRoutes = [
   '/',
@@ -45,7 +48,26 @@ export async function middleware(request: NextRequest) {
       return response;
     }
 
-    const user = await fetchUserByUserId(userSession.userSub as string);
+    const user = await runWithAmplifyServerContext({
+      nextServerContext: { request, response },
+      operation: async (contextSpec) => {
+        try {
+          const request = await reqResBasedClient.graphql(contextSpec, {
+            query: getUserByUserId,
+            variables: {
+              userId: userSession.userSub as string,
+            },
+          });
+          return request.data.getUserByUserId.items[0];
+        } catch (error) {
+          return null;
+        }
+      },
+    });
+
+    if (!user) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
 
     if (authenticated && authRoutes.includes(pathname)) {
       if (user.role === UserRole.USER) {

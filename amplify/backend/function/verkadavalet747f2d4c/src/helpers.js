@@ -36,8 +36,8 @@ export const createAppsyncRequest = async (query, variables) => {
 export const executeRequest = async ({ query, name }, variables) => {
   const request = await createAppsyncRequest(query, variables);
   const response = await fetch(request);
-  const data = (await response.json()).data;
-  return data[name];
+  const data = await response.json();
+  return data.data[name];
 };
 
 export const generateRandomInteger = (integerLength) => {

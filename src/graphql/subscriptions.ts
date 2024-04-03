@@ -60,6 +60,7 @@ export const onCreateCars = /* GraphQL */ `subscription OnCreateCars($filter: Mo
   onCreateCars(filter: $filter) {
     licensePlateNum
     userId
+    username
     carMaker
     carModel
     color
@@ -81,6 +82,7 @@ export const onUpdateCars = /* GraphQL */ `subscription OnUpdateCars($filter: Mo
   onUpdateCars(filter: $filter) {
     licensePlateNum
     userId
+    username
     carMaker
     carModel
     color
@@ -102,6 +104,7 @@ export const onDeleteCars = /* GraphQL */ `subscription OnDeleteCars($filter: Mo
   onDeleteCars(filter: $filter) {
     licensePlateNum
     userId
+    username
     carMaker
     carModel
     color
@@ -166,10 +169,12 @@ export const onCreateTickets = /* GraphQL */ `subscription OnCreateTickets($filt
     ticketNum
     cameraId
     organizationName
+    slot
     licensePlateNum
     car {
       licensePlateNum
       userId
+      username
       carMaker
       carModel
       color
@@ -178,7 +183,6 @@ export const onCreateTickets = /* GraphQL */ `subscription OnCreateTickets($filt
       updated_at
       __typename
     }
-    confidence
     status
     checkIn
     checkOut
@@ -197,10 +201,12 @@ export const onUpdateTickets = /* GraphQL */ `subscription OnUpdateTickets($filt
     ticketNum
     cameraId
     organizationName
+    slot
     licensePlateNum
     car {
       licensePlateNum
       userId
+      username
       carMaker
       carModel
       color
@@ -209,7 +215,6 @@ export const onUpdateTickets = /* GraphQL */ `subscription OnUpdateTickets($filt
       updated_at
       __typename
     }
-    confidence
     status
     checkIn
     checkOut
@@ -228,10 +233,12 @@ export const onDeleteTickets = /* GraphQL */ `subscription OnDeleteTickets($filt
     ticketNum
     cameraId
     organizationName
+    slot
     licensePlateNum
     car {
       licensePlateNum
       userId
+      username
       carMaker
       carModel
       color
@@ -240,7 +247,6 @@ export const onDeleteTickets = /* GraphQL */ `subscription OnDeleteTickets($filt
       updated_at
       __typename
     }
-    confidence
     status
     checkIn
     checkOut

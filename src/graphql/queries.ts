@@ -86,6 +86,7 @@ export const getCars = /* GraphQL */ `query GetCars($licensePlateNum: String!) {
   getCars(licensePlateNum: $licensePlateNum) {
     licensePlateNum
     userId
+    username
     carMaker
     carModel
     color
@@ -117,6 +118,7 @@ export const listCars = /* GraphQL */ `query ListCars(
     items {
       licensePlateNum
       userId
+      username
       carMaker
       carModel
       color
@@ -147,6 +149,7 @@ export const getCarsByUserId = /* GraphQL */ `query GetCarsByUserId(
     items {
       licensePlateNum
       userId
+      username
       carMaker
       carModel
       color
@@ -242,10 +245,12 @@ export const getTickets = /* GraphQL */ `query GetTickets($id: ID!) {
     ticketNum
     cameraId
     organizationName
+    slot
     licensePlateNum
     car {
       licensePlateNum
       userId
+      username
       carMaker
       carModel
       color
@@ -254,7 +259,6 @@ export const getTickets = /* GraphQL */ `query GetTickets($id: ID!) {
       updated_at
       __typename
     }
-    confidence
     status
     checkIn
     checkOut
@@ -278,8 +282,8 @@ export const listTickets = /* GraphQL */ `query ListTickets(
       ticketNum
       cameraId
       organizationName
+      slot
       licensePlateNum
-      confidence
       status
       checkIn
       checkOut
@@ -314,8 +318,8 @@ export const ticketsByLicensePlateNum = /* GraphQL */ `query TicketsByLicensePla
       ticketNum
       cameraId
       organizationName
+      slot
       licensePlateNum
-      confidence
       status
       checkIn
       checkOut

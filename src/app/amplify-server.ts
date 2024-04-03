@@ -1,9 +1,16 @@
 import { createServerRunner } from '@aws-amplify/adapter-nextjs';
-import { generateServerClientUsingCookies } from '@aws-amplify/adapter-nextjs/api';
+import {
+  generateServerClientUsingCookies,
+  generateServerClientUsingReqRes,
+} from '@aws-amplify/adapter-nextjs/api';
 import { cookies } from 'next/headers';
 import config from '@/amplifyconfiguration.json';
 
 export const { runWithAmplifyServerContext } = createServerRunner({
+  config,
+});
+
+export const reqResBasedClient = generateServerClientUsingReqRes({
   config,
 });
 

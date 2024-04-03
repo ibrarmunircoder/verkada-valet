@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Swal from 'sweetalert2';
 import { carService } from '@/app/shared/services/cars.service';
 import { getCurrentUser } from 'aws-amplify/auth';
+import { userService } from '@/app/shared/services/user.service';
 
 export const useAddNewCarForm = () => {
   const validationSchema = useAddNewCarSchema();
@@ -33,10 +34,12 @@ export const useAddNewCarForm = () => {
     });
     try {
       const user = await getCurrentUser();
+      const dbUser = await userService.fetchUserById(user.userId);
       await carService.addNewUserCar({
         ...values,
         year: +values.year,
         userId: user.userId,
+        username: dbUser.name,
       });
       toast.fire({
         icon: 'success',

@@ -32,7 +32,6 @@ const handleCreateTicket = async (event) => {
       licensePlateNum: body.data.license_plate_number,
       status: 'IN_PARKING',
       checkIn: new Date(body.data.created * 1000).toISOString(),
-      confidence: body.data.confidence,
     });
     return {
       statusCode: 200,

@@ -31,6 +31,7 @@ type Cars
   ) {
   licensePlateNum: String! @primaryKey
   userId: String! @index(name: "byUserId", queryField: "getCarsByUserId")
+  username: String!
   carMaker: String!
   carModel: String!
   color: String!
@@ -73,9 +74,9 @@ type Tickets
   ticketNum: String!
   cameraId: String!
   organizationName: String!
+  slot: Int
   licensePlateNum: String! @index(name: "byCarLicensePlateNum")
   car: Cars @belongsTo(fields: ["licensePlateNum"])
-  confidence: Int
   status: TicketStatus!
   checkIn: AWSDateTime
   checkOut: AWSDateTime

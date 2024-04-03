@@ -72,6 +72,7 @@ export const createCars = /* GraphQL */ `mutation CreateCars(
   createCars(input: $input, condition: $condition) {
     licensePlateNum
     userId
+    username
     carMaker
     carModel
     color
@@ -96,6 +97,7 @@ export const updateCars = /* GraphQL */ `mutation UpdateCars(
   updateCars(input: $input, condition: $condition) {
     licensePlateNum
     userId
+    username
     carMaker
     carModel
     color
@@ -120,6 +122,7 @@ export const deleteCars = /* GraphQL */ `mutation DeleteCars(
   deleteCars(input: $input, condition: $condition) {
     licensePlateNum
     userId
+    username
     carMaker
     carModel
     color
@@ -196,10 +199,12 @@ export const createTickets = /* GraphQL */ `mutation CreateTickets(
     ticketNum
     cameraId
     organizationName
+    slot
     licensePlateNum
     car {
       licensePlateNum
       userId
+      username
       carMaker
       carModel
       color
@@ -208,7 +213,6 @@ export const createTickets = /* GraphQL */ `mutation CreateTickets(
       updated_at
       __typename
     }
-    confidence
     status
     checkIn
     checkOut
@@ -230,10 +234,12 @@ export const updateTickets = /* GraphQL */ `mutation UpdateTickets(
     ticketNum
     cameraId
     organizationName
+    slot
     licensePlateNum
     car {
       licensePlateNum
       userId
+      username
       carMaker
       carModel
       color
@@ -242,7 +248,6 @@ export const updateTickets = /* GraphQL */ `mutation UpdateTickets(
       updated_at
       __typename
     }
-    confidence
     status
     checkIn
     checkOut
@@ -264,10 +269,12 @@ export const deleteTickets = /* GraphQL */ `mutation DeleteTickets(
     ticketNum
     cameraId
     organizationName
+    slot
     licensePlateNum
     car {
       licensePlateNum
       userId
+      username
       carMaker
       carModel
       color
@@ -276,7 +283,6 @@ export const deleteTickets = /* GraphQL */ `mutation DeleteTickets(
       updated_at
       __typename
     }
-    confidence
     status
     checkIn
     checkOut

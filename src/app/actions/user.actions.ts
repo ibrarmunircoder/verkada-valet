@@ -1,5 +1,10 @@
 import { getUserByUserId } from '@/graphql/queries';
-import { cookieBasedClient } from '../amplify-server';
+import {
+  cookieBasedClient,
+  runWithAmplifyServerContext,
+} from '../amplify-server';
+import { getCurrentUser } from 'aws-amplify/auth/server';
+import { cookies } from 'next/headers';
 
 export async function fetchUserByUserId(userId: string) {
   const request = await cookieBasedClient.graphql({
@@ -10,4 +15,13 @@ export async function fetchUserByUserId(userId: string) {
   });
 
   return request.data.getUserByUserId.items[0];
+}
+
+export async function getCurrentAuthUser() {
+  const currentUser = await runWithAmplifyServerContext({
+    nextServerContext: { cookies },
+    operation: (contextSpec) => getCurrentUser(contextSpec),
+  });
+
+  return currentUser;
 }

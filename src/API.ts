@@ -2,30 +2,27 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateUsersInput = {
-  email: string,
-  userId: string,
-  role: UserRole,
-  name: string,
-  dob?: string | null,
-};
-
-export enum UserRole {
-  USER = "USER",
-  ORGANIZATION = "ORGANIZATION",
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
 }
 
 
-export type ModelUsersConditionInput = {
-  userId?: ModelStringInput | null,
-  role?: ModelUserRoleInput | null,
-  name?: ModelStringInput | null,
-  dob?: ModelStringInput | null,
-  and?: Array< ModelUsersConditionInput | null > | null,
-  or?: Array< ModelUsersConditionInput | null > | null,
-  not?: ModelUsersConditionInput | null,
+export type ModelTicketsFilterInput = {
+  ticketNum?: ModelStringInput | null,
+  cameraId?: ModelStringInput | null,
+  organizationName?: ModelStringInput | null,
+  slot?: ModelIntInput | null,
+  licensePlateNum?: ModelStringInput | null,
+  status?: ModelTicketStatusInput | null,
+  checkIn?: ModelStringInput | null,
+  checkOut?: ModelStringInput | null,
+  id?: ModelIDInput | null,
   created_at?: ModelStringInput | null,
   updated_at?: ModelStringInput | null,
+  and?: Array< ModelTicketsFilterInput | null > | null,
+  or?: Array< ModelTicketsFilterInput | null > | null,
+  not?: ModelTicketsFilterInput | null,
 };
 
 export type ModelStringInput = {
@@ -68,6 +65,107 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelTicketStatusInput = {
+  eq?: TicketStatus | null,
+  ne?: TicketStatus | null,
+};
+
+export enum TicketStatus {
+  IN_PARKING = "IN_PARKING",
+  PICKEDUP = "PICKEDUP",
+}
+
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type ModelTicketsConnection = {
+  __typename: "ModelTicketsConnection",
+  items:  Array<Tickets | null >,
+  nextToken?: string | null,
+};
+
+export type Tickets = {
+  __typename: "Tickets",
+  ticketNum: string,
+  cameraId: string,
+  organizationName: string,
+  slot?: number | null,
+  licensePlateNum: string,
+  car?: Cars | null,
+  status: TicketStatus,
+  checkIn?: string | null,
+  checkOut?: string | null,
+  id: string,
+  created_at: string,
+  updated_at: string,
+};
+
+export type Cars = {
+  __typename: "Cars",
+  licensePlateNum: string,
+  userId: string,
+  username: string,
+  carMaker: string,
+  carModel: string,
+  color: string,
+  year: number,
+  tickets?: ModelTicketsConnection | null,
+  created_at: string,
+  updated_at: string,
+};
+
+export type CreateUsersInput = {
+  email: string,
+  userId: string,
+  role: UserRole,
+  name: string,
+  dob?: string | null,
+};
+
+export enum UserRole {
+  USER = "USER",
+  ORGANIZATION = "ORGANIZATION",
+}
+
+
+export type ModelUsersConditionInput = {
+  userId?: ModelStringInput | null,
+  role?: ModelUserRoleInput | null,
+  name?: ModelStringInput | null,
+  dob?: ModelStringInput | null,
+  and?: Array< ModelUsersConditionInput | null > | null,
+  or?: Array< ModelUsersConditionInput | null > | null,
+  not?: ModelUsersConditionInput | null,
+  created_at?: ModelStringInput | null,
+  updated_at?: ModelStringInput | null,
+};
+
 export type ModelUserRoleInput = {
   eq?: UserRole | null,
   ne?: UserRole | null,
@@ -99,6 +197,7 @@ export type DeleteUsersInput = {
 export type CreateCarsInput = {
   licensePlateNum: string,
   userId: string,
+  username: string,
   carMaker: string,
   carModel: string,
   color: string,
@@ -107,6 +206,7 @@ export type CreateCarsInput = {
 
 export type ModelCarsConditionInput = {
   userId?: ModelStringInput | null,
+  username?: ModelStringInput | null,
   carMaker?: ModelStringInput | null,
   carModel?: ModelStringInput | null,
   color?: ModelStringInput | null,
@@ -118,62 +218,10 @@ export type ModelCarsConditionInput = {
   updated_at?: ModelStringInput | null,
 };
 
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export type Cars = {
-  __typename: "Cars",
-  licensePlateNum: string,
-  userId: string,
-  carMaker: string,
-  carModel: string,
-  color: string,
-  year: number,
-  tickets?: ModelTicketsConnection | null,
-  created_at: string,
-  updated_at: string,
-};
-
-export type ModelTicketsConnection = {
-  __typename: "ModelTicketsConnection",
-  items:  Array<Tickets | null >,
-  nextToken?: string | null,
-};
-
-export type Tickets = {
-  __typename: "Tickets",
-  ticketNum: string,
-  cameraId: string,
-  organizationName: string,
-  licensePlateNum: string,
-  car?: Cars | null,
-  confidence?: number | null,
-  status: TicketStatus,
-  checkIn?: string | null,
-  checkOut?: string | null,
-  id: string,
-  created_at: string,
-  updated_at: string,
-};
-
-export enum TicketStatus {
-  IN_PARKING = "IN_PARKING",
-  PICKEDUP = "PICKEDUP",
-}
-
-
 export type UpdateCarsInput = {
   licensePlateNum: string,
   userId?: string | null,
+  username?: string | null,
   carMaker?: string | null,
   carModel?: string | null,
   color?: string | null,
@@ -223,8 +271,8 @@ export type CreateTicketsInput = {
   ticketNum: string,
   cameraId: string,
   organizationName: string,
+  slot?: number | null,
   licensePlateNum: string,
-  confidence?: number | null,
   status: TicketStatus,
   checkIn?: string | null,
   checkOut?: string | null,
@@ -235,8 +283,8 @@ export type ModelTicketsConditionInput = {
   ticketNum?: ModelStringInput | null,
   cameraId?: ModelStringInput | null,
   organizationName?: ModelStringInput | null,
+  slot?: ModelIntInput | null,
   licensePlateNum?: ModelStringInput | null,
-  confidence?: ModelIntInput | null,
   status?: ModelTicketStatusInput | null,
   checkIn?: ModelStringInput | null,
   checkOut?: ModelStringInput | null,
@@ -247,17 +295,12 @@ export type ModelTicketsConditionInput = {
   updated_at?: ModelStringInput | null,
 };
 
-export type ModelTicketStatusInput = {
-  eq?: TicketStatus | null,
-  ne?: TicketStatus | null,
-};
-
 export type UpdateTicketsInput = {
   ticketNum?: string | null,
   cameraId?: string | null,
   organizationName?: string | null,
+  slot?: number | null,
   licensePlateNum?: string | null,
-  confidence?: number | null,
   status?: TicketStatus | null,
   checkIn?: string | null,
   checkOut?: string | null,
@@ -282,28 +325,6 @@ export type ModelUsersFilterInput = {
   not?: ModelUsersFilterInput | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
-
 export type ModelUsersConnection = {
   __typename: "ModelUsersConnection",
   items:  Array<Users | null >,
@@ -313,6 +334,7 @@ export type ModelUsersConnection = {
 export type ModelCarsFilterInput = {
   licensePlateNum?: ModelStringInput | null,
   userId?: ModelStringInput | null,
+  username?: ModelStringInput | null,
   carMaker?: ModelStringInput | null,
   carModel?: ModelStringInput | null,
   color?: ModelStringInput | null,
@@ -347,23 +369,6 @@ export type ModelCamerasConnection = {
   __typename: "ModelCamerasConnection",
   items:  Array<Cameras | null >,
   nextToken?: string | null,
-};
-
-export type ModelTicketsFilterInput = {
-  ticketNum?: ModelStringInput | null,
-  cameraId?: ModelStringInput | null,
-  organizationName?: ModelStringInput | null,
-  licensePlateNum?: ModelStringInput | null,
-  confidence?: ModelIntInput | null,
-  status?: ModelTicketStatusInput | null,
-  checkIn?: ModelStringInput | null,
-  checkOut?: ModelStringInput | null,
-  id?: ModelIDInput | null,
-  created_at?: ModelStringInput | null,
-  updated_at?: ModelStringInput | null,
-  and?: Array< ModelTicketsFilterInput | null > | null,
-  or?: Array< ModelTicketsFilterInput | null > | null,
-  not?: ModelTicketsFilterInput | null,
 };
 
 export type ModelSubscriptionUsersFilterInput = {
@@ -412,6 +417,7 @@ export type ModelSubscriptionIDInput = {
 export type ModelSubscriptionCarsFilterInput = {
   licensePlateNum?: ModelSubscriptionStringInput | null,
   userId?: ModelSubscriptionStringInput | null,
+  username?: ModelSubscriptionStringInput | null,
   carMaker?: ModelSubscriptionStringInput | null,
   carModel?: ModelSubscriptionStringInput | null,
   color?: ModelSubscriptionStringInput | null,
@@ -450,8 +456,8 @@ export type ModelSubscriptionTicketsFilterInput = {
   ticketNum?: ModelSubscriptionStringInput | null,
   cameraId?: ModelSubscriptionStringInput | null,
   organizationName?: ModelSubscriptionStringInput | null,
+  slot?: ModelSubscriptionIntInput | null,
   licensePlateNum?: ModelSubscriptionStringInput | null,
-  confidence?: ModelSubscriptionIntInput | null,
   status?: ModelSubscriptionStringInput | null,
   checkIn?: ModelSubscriptionStringInput | null,
   checkOut?: ModelSubscriptionStringInput | null,
@@ -460,6 +466,43 @@ export type ModelSubscriptionTicketsFilterInput = {
   updated_at?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionTicketsFilterInput | null > | null,
   or?: Array< ModelSubscriptionTicketsFilterInput | null > | null,
+};
+
+export type CustomTicketsByLicensePlateNumQueryVariables = {
+  licensePlateNum: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelTicketsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type CustomTicketsByLicensePlateNumQuery = {
+  ticketsByLicensePlateNum?:  {
+    __typename: "ModelTicketsConnection",
+    items:  Array< {
+      __typename: "Tickets",
+      ticketNum: string,
+      cameraId: string,
+      organizationName: string,
+      licensePlateNum: string,
+      status: TicketStatus,
+      checkIn?: string | null,
+      checkOut?: string | null,
+      id: string,
+      car?:  {
+        __typename: "Cars",
+        licensePlateNum: string,
+        userId: string,
+        carMaker: string,
+        carModel: string,
+        color: string,
+        year: number,
+      } | null,
+      created_at: string,
+      updated_at: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type CreateUsersMutationVariables = {
@@ -526,6 +569,7 @@ export type CreateCarsMutation = {
     __typename: "Cars",
     licensePlateNum: string,
     userId: string,
+    username: string,
     carMaker: string,
     carModel: string,
     color: string,
@@ -549,6 +593,7 @@ export type UpdateCarsMutation = {
     __typename: "Cars",
     licensePlateNum: string,
     userId: string,
+    username: string,
     carMaker: string,
     carModel: string,
     color: string,
@@ -572,6 +617,7 @@ export type DeleteCarsMutation = {
     __typename: "Cars",
     licensePlateNum: string,
     userId: string,
+    username: string,
     carMaker: string,
     carModel: string,
     color: string,
@@ -644,11 +690,13 @@ export type CreateTicketsMutation = {
     ticketNum: string,
     cameraId: string,
     organizationName: string,
+    slot?: number | null,
     licensePlateNum: string,
     car?:  {
       __typename: "Cars",
       licensePlateNum: string,
       userId: string,
+      username: string,
       carMaker: string,
       carModel: string,
       color: string,
@@ -656,7 +704,6 @@ export type CreateTicketsMutation = {
       created_at: string,
       updated_at: string,
     } | null,
-    confidence?: number | null,
     status: TicketStatus,
     checkIn?: string | null,
     checkOut?: string | null,
@@ -677,11 +724,13 @@ export type UpdateTicketsMutation = {
     ticketNum: string,
     cameraId: string,
     organizationName: string,
+    slot?: number | null,
     licensePlateNum: string,
     car?:  {
       __typename: "Cars",
       licensePlateNum: string,
       userId: string,
+      username: string,
       carMaker: string,
       carModel: string,
       color: string,
@@ -689,7 +738,6 @@ export type UpdateTicketsMutation = {
       created_at: string,
       updated_at: string,
     } | null,
-    confidence?: number | null,
     status: TicketStatus,
     checkIn?: string | null,
     checkOut?: string | null,
@@ -710,11 +758,13 @@ export type DeleteTicketsMutation = {
     ticketNum: string,
     cameraId: string,
     organizationName: string,
+    slot?: number | null,
     licensePlateNum: string,
     car?:  {
       __typename: "Cars",
       licensePlateNum: string,
       userId: string,
+      username: string,
       carMaker: string,
       carModel: string,
       color: string,
@@ -722,7 +772,6 @@ export type DeleteTicketsMutation = {
       created_at: string,
       updated_at: string,
     } | null,
-    confidence?: number | null,
     status: TicketStatus,
     checkIn?: string | null,
     checkOut?: string | null,
@@ -808,6 +857,7 @@ export type GetCarsQuery = {
     __typename: "Cars",
     licensePlateNum: string,
     userId: string,
+    username: string,
     carMaker: string,
     carModel: string,
     color: string,
@@ -836,6 +886,7 @@ export type ListCarsQuery = {
       __typename: "Cars",
       licensePlateNum: string,
       userId: string,
+      username: string,
       carMaker: string,
       carModel: string,
       color: string,
@@ -862,6 +913,7 @@ export type GetCarsByUserIdQuery = {
       __typename: "Cars",
       licensePlateNum: string,
       userId: string,
+      username: string,
       carMaker: string,
       carModel: string,
       color: string,
@@ -944,11 +996,13 @@ export type GetTicketsQuery = {
     ticketNum: string,
     cameraId: string,
     organizationName: string,
+    slot?: number | null,
     licensePlateNum: string,
     car?:  {
       __typename: "Cars",
       licensePlateNum: string,
       userId: string,
+      username: string,
       carMaker: string,
       carModel: string,
       color: string,
@@ -956,7 +1010,6 @@ export type GetTicketsQuery = {
       created_at: string,
       updated_at: string,
     } | null,
-    confidence?: number | null,
     status: TicketStatus,
     checkIn?: string | null,
     checkOut?: string | null,
@@ -980,8 +1033,8 @@ export type ListTicketsQuery = {
       ticketNum: string,
       cameraId: string,
       organizationName: string,
+      slot?: number | null,
       licensePlateNum: string,
-      confidence?: number | null,
       status: TicketStatus,
       checkIn?: string | null,
       checkOut?: string | null,
@@ -1009,8 +1062,8 @@ export type TicketsByLicensePlateNumQuery = {
       ticketNum: string,
       cameraId: string,
       organizationName: string,
+      slot?: number | null,
       licensePlateNum: string,
-      confidence?: number | null,
       status: TicketStatus,
       checkIn?: string | null,
       checkOut?: string | null,
@@ -1082,6 +1135,7 @@ export type OnCreateCarsSubscription = {
     __typename: "Cars",
     licensePlateNum: string,
     userId: string,
+    username: string,
     carMaker: string,
     carModel: string,
     color: string,
@@ -1104,6 +1158,7 @@ export type OnUpdateCarsSubscription = {
     __typename: "Cars",
     licensePlateNum: string,
     userId: string,
+    username: string,
     carMaker: string,
     carModel: string,
     color: string,
@@ -1126,6 +1181,7 @@ export type OnDeleteCarsSubscription = {
     __typename: "Cars",
     licensePlateNum: string,
     userId: string,
+    username: string,
     carMaker: string,
     carModel: string,
     color: string,
@@ -1194,11 +1250,13 @@ export type OnCreateTicketsSubscription = {
     ticketNum: string,
     cameraId: string,
     organizationName: string,
+    slot?: number | null,
     licensePlateNum: string,
     car?:  {
       __typename: "Cars",
       licensePlateNum: string,
       userId: string,
+      username: string,
       carMaker: string,
       carModel: string,
       color: string,
@@ -1206,7 +1264,6 @@ export type OnCreateTicketsSubscription = {
       created_at: string,
       updated_at: string,
     } | null,
-    confidence?: number | null,
     status: TicketStatus,
     checkIn?: string | null,
     checkOut?: string | null,
@@ -1226,11 +1283,13 @@ export type OnUpdateTicketsSubscription = {
     ticketNum: string,
     cameraId: string,
     organizationName: string,
+    slot?: number | null,
     licensePlateNum: string,
     car?:  {
       __typename: "Cars",
       licensePlateNum: string,
       userId: string,
+      username: string,
       carMaker: string,
       carModel: string,
       color: string,
@@ -1238,7 +1297,6 @@ export type OnUpdateTicketsSubscription = {
       created_at: string,
       updated_at: string,
     } | null,
-    confidence?: number | null,
     status: TicketStatus,
     checkIn?: string | null,
     checkOut?: string | null,
@@ -1258,11 +1316,13 @@ export type OnDeleteTicketsSubscription = {
     ticketNum: string,
     cameraId: string,
     organizationName: string,
+    slot?: number | null,
     licensePlateNum: string,
     car?:  {
       __typename: "Cars",
       licensePlateNum: string,
       userId: string,
+      username: string,
       carMaker: string,
       carModel: string,
       color: string,
@@ -1270,7 +1330,6 @@ export type OnDeleteTicketsSubscription = {
       created_at: string,
       updated_at: string,
     } | null,
-    confidence?: number | null,
     status: TicketStatus,
     checkIn?: string | null,
     checkOut?: string | null,
