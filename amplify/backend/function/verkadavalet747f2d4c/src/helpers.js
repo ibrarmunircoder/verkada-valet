@@ -3,9 +3,10 @@ import { defaultProvider } from '@aws-sdk/credential-provider-node';
 import { SignatureV4 } from '@aws-sdk/signature-v4';
 import { HttpRequest } from '@aws-sdk/protocol-http';
 import { default as fetch, Request } from 'node-fetch';
+import createError from 'http-errors';
 
 const GRAPHQL_ENDPOINT = process.env.API_VERKADAVALET_GRAPHQLAPIENDPOINTOUTPUT;
-const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
+const AWS_REGION = process.env.AWS_REGION;
 const { Sha256 } = crypto;
 
 const endpoint = new URL(GRAPHQL_ENDPOINT);
@@ -36,7 +37,6 @@ export const executeRequest = async ({ query, name }, variables) => {
   const request = await createAppsyncRequest(query, variables);
   const response = await fetch(request);
   const data = (await response.json()).data;
-  console.log(data, 'data');
   return data[name];
 };
 

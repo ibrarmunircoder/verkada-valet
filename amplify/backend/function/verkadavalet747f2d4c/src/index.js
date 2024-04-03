@@ -9,6 +9,7 @@ import httpErrorHandler from '@middy/http-error-handler';
 import httpSecurityHeaders from '@middy/http-security-headers';
 import jsonBodyParser from '@middy/http-json-body-parser';
 import cors from '@middy/http-cors';
+import createError from 'http-errors';
 import { generateRandomInteger, verifySignature } from './helpers.js';
 import { createNewTicket, getCameraById } from './api.js';
 /**
@@ -21,6 +22,9 @@ const handleCreateTicket = async (event) => {
     verifySignature(event.headers['Verkada-Signature']);
     const body = event.body;
     const orgCamera = await getCameraById(body.data.camera_id);
+    if (!orgCamera) {
+      throw new createError.UnprocessableEntity('Camera not found');
+    }
     await createNewTicket({
       ticketNum: generateRandomInteger(8),
       cameraId: body.data.camera_id,
@@ -28,6 +32,7 @@ const handleCreateTicket = async (event) => {
       licensePlateNum: body.data.license_plate_number,
       status: 'IN_PARKING',
       checkIn: new Date(body.data.created * 1000).toISOString(),
+      confidence: body.data.confidence,
     });
     return {
       statusCode: 200,

@@ -22,6 +22,7 @@ export const createTickets = /* GraphQL */ `
       status
       checkIn
       checkOut
+      confidence
       id
       created_at
       updated_at

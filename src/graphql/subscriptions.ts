@@ -178,6 +178,7 @@ export const onCreateTickets = /* GraphQL */ `subscription OnCreateTickets($filt
       updated_at
       __typename
     }
+    confidence
     status
     checkIn
     checkOut
@@ -208,6 +209,7 @@ export const onUpdateTickets = /* GraphQL */ `subscription OnUpdateTickets($filt
       updated_at
       __typename
     }
+    confidence
     status
     checkIn
     checkOut
@@ -238,6 +240,7 @@ export const onDeleteTickets = /* GraphQL */ `subscription OnDeleteTickets($filt
       updated_at
       __typename
     }
+    confidence
     status
     checkIn
     checkOut

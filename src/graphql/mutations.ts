@@ -208,6 +208,7 @@ export const createTickets = /* GraphQL */ `mutation CreateTickets(
       updated_at
       __typename
     }
+    confidence
     status
     checkIn
     checkOut
@@ -241,6 +242,7 @@ export const updateTickets = /* GraphQL */ `mutation UpdateTickets(
       updated_at
       __typename
     }
+    confidence
     status
     checkIn
     checkOut
@@ -274,6 +276,7 @@ export const deleteTickets = /* GraphQL */ `mutation DeleteTickets(
       updated_at
       __typename
     }
+    confidence
     status
     checkIn
     checkOut

@@ -3,18 +3,13 @@
 import React from 'react';
 import { useAddNewCarmeraForm } from './hooks/useAddNewCameraForm';
 import { Controller } from 'react-hook-form';
-import { Button, Input, useAuthenticator } from '@aws-amplify/ui-react';
+import { Button, Input } from '@aws-amplify/ui-react';
 import { isError, isErrorMessage } from '@/app/shared/utils';
 import { ErrorHelperMessage, Spinner } from '@/app/components';
 
 const AddNewCamera = () => {
-  const { authStatus } = useAuthenticator();
   const { control, errors, isSubmitting, onSubmit, touchedFields } =
     useAddNewCarmeraForm();
-
-  if (authStatus === 'configuring') {
-    return <Spinner />;
-  }
 
   return (
     <main className="w-full min-h-screen flex justify-center p-3">

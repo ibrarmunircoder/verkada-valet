@@ -254,6 +254,7 @@ export const getTickets = /* GraphQL */ `query GetTickets($id: ID!) {
       updated_at
       __typename
     }
+    confidence
     status
     checkIn
     checkOut
@@ -278,6 +279,7 @@ export const listTickets = /* GraphQL */ `query ListTickets(
       cameraId
       organizationName
       licensePlateNum
+      confidence
       status
       checkIn
       checkOut
@@ -313,6 +315,7 @@ export const ticketsByLicensePlateNum = /* GraphQL */ `query TicketsByLicensePla
       cameraId
       organizationName
       licensePlateNum
+      confidence
       status
       checkIn
       checkOut

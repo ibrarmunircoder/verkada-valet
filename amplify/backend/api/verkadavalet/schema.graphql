@@ -75,6 +75,7 @@ type Tickets
   organizationName: String!
   licensePlateNum: String! @index(name: "byCarLicensePlateNum")
   car: Cars @belongsTo(fields: ["licensePlateNum"])
+  confidence: Int
   status: TicketStatus!
   checkIn: AWSDateTime
   checkOut: AWSDateTime
