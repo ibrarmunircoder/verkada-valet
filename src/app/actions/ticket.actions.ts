@@ -1,17 +1,16 @@
 import { cookieBasedClient } from '../amplify-server';
-import { TicketStatus } from '@/API';
+import { ModelSortDirection, TicketStatus } from '@/API';
 import {
-  customListTickets,
-  getTicketsByLicensePlateNumber,
+  getTicketsByCameraIdAndCreated_at,
+  getTicketsByLicensePlateNumAndCreated_at,
 } from '@/graphql/custom-queries';
 
 export async function fetchUserCurrentTicketsByLicensePlateNum(
   licensePlateNum: string
 ) {
   if (!licensePlateNum) return [];
-
   const request = await cookieBasedClient.graphql({
-    query: getTicketsByLicensePlateNumber,
+    query: getTicketsByLicensePlateNumAndCreated_at,
     variables: {
       licensePlateNum,
       filter: {
@@ -19,8 +18,7 @@ export async function fetchUserCurrentTicketsByLicensePlateNum(
       },
     },
   });
-
-  return request.data.ticketsByLicensePlateNum.items;
+  return request.data.ticketsByLicensePlateNumAndCreated_at.items;
 }
 
 export async function fetchUserPastTicketsByLicensePlateNum(
@@ -29,30 +27,47 @@ export async function fetchUserPastTicketsByLicensePlateNum(
   if (!licensePlateNum) return [];
 
   const request = await cookieBasedClient.graphql({
-    query: getTicketsByLicensePlateNumber,
+    query: getTicketsByLicensePlateNumAndCreated_at,
     variables: {
       licensePlateNum,
+      sortDirection: ModelSortDirection.DESC,
       filter: {
         status: { eq: TicketStatus.PICKEDUP },
       },
     },
   });
-
-  return request.data.ticketsByLicensePlateNum.items;
+  return request.data.ticketsByLicensePlateNumAndCreated_at.items;
 }
 
 export async function fetchCurrentUserTicketsByCameraId(cameraId: string) {
   if (!cameraId) return [];
 
   const request = await cookieBasedClient.graphql({
-    query: customListTickets,
+    query: getTicketsByCameraIdAndCreated_at,
     variables: {
+      cameraId,
       filter: {
-        cameraId: { eq: cameraId },
         status: { eq: TicketStatus.IN_PARKING },
       },
     },
   });
 
-  return request.data.listTickets.items;
+  return request.data.ticketsByCameraIdAndCreated_at.items;
+}
+
+export async function fetchPastUserTicketsByCameraId(cameraId: string) {
+  if (!cameraId) return [];
+
+  const request = await cookieBasedClient.graphql({
+    query: getTicketsByCameraIdAndCreated_at,
+    variables: {
+      cameraId,
+      sortDirection: ModelSortDirection.DESC,
+      filter: {
+        status: { eq: TicketStatus.PICKEDUP },
+      },
+    },
+  });
+
+  return request.data.ticketsByCameraIdAndCreated_at.items;
 }

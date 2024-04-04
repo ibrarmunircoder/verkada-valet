@@ -4,6 +4,7 @@ import { getUserCarsByUseId } from '@/app/actions/car.actions';
 import { UserTicketCard } from '@/app/shared/components/UserTicketCard';
 
 export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 
 const UserPastTickets = async () => {
   try {

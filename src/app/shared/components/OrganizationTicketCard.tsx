@@ -104,17 +104,17 @@ export const OrganizationTicketCard = ({ ticket }: UserTicketCardProps) => {
             )}
           </span>
         </div>
-        {ticketState.status === TicketStatus.PICKEDUP &&
-          ticketState.checkOut && (
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-bold">Time Out:</span>
-              <span>
-                {dayjs(new Date(ticketState.checkOut as string)).format(
-                  'DD MMM YYYY hh:ss'
-                )}
-              </span>
-            </div>
-          )}
+        {ticketState.checkOut && (
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-bold">Time Out:</span>
+            <span>
+              {dayjs(new Date(ticketState.checkOut as string)).format(
+                'DD MMM YYYY hh:ss'
+              )}
+            </span>
+          </div>
+        )}
+
         <div className="flex items-center gap-3">
           <span className="text-sm font-bold">Color:</span>
           <span>{ticketState.car?.color}</span>
@@ -147,14 +147,16 @@ export const OrganizationTicketCard = ({ ticket }: UserTicketCardProps) => {
             <Badge variation="info">{ticketState.status}</Badge>
           </div>
         )}
-        <Button
-          isLoading={isLoading}
-          onClick={isEdit ? handleUpdateTicketSlot : handleAddSlot}
-          variation="primary"
-          isFullWidth
-        >
-          {isEdit ? 'Save' : 'Add Slot'}
-        </Button>
+        {ticketState.status === TicketStatus.IN_PARKING && (
+          <Button
+            isLoading={isLoading}
+            onClick={isEdit ? handleUpdateTicketSlot : handleAddSlot}
+            variation="primary"
+            isFullWidth
+          >
+            {isEdit ? 'Save' : 'Add Slot'}
+          </Button>
+        )}
       </div>
     </div>
   );

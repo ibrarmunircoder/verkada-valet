@@ -8,16 +8,67 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getTicketsByLicensePlateNumber =
-  /* GraphQL */ `query CustomTicketsByLicensePlateNum(
-    $licensePlateNum: String!
+export const getTicketsByLicensePlateNumAndCreated_at =
+  /* GraphQL */ `query CustomTicketsByLicensePlateNumAndCreated_at(
+  $licensePlateNum: String!
+  $created_at: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelTicketsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  ticketsByLicensePlateNumAndCreated_at(
+    licensePlateNum: $licensePlateNum
+    created_at: $created_at
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      ticketNum
+      cameraId
+      organizationName
+      slot
+      car {
+      licensePlateNum
+      userId
+      carMaker
+      carModel
+      color
+      year
+
+    }
+      licensePlateNum
+      status
+      checkIn
+      checkOut
+      created_at
+      updated_at
+      id
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.TicketsByLicensePlateNumAndCreated_atQueryVariables,
+    APITypes.TicketsByLicensePlateNumAndCreated_atQuery
+  >;
+
+export const getTicketsByCameraIdAndCreated_at =
+  /* GraphQL */ `query CustomTicketsByCameraIdAndCreated_at(
+    $cameraId: String!
+    $created_at: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelTicketsFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    ticketsByLicensePlateNum(
-      licensePlateNum: $licensePlateNum
+    ticketsByCameraIdAndCreated_at(
+      cameraId: $cameraId
+      created_at: $created_at
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -27,22 +78,24 @@ export const getTicketsByLicensePlateNumber =
         ticketNum
         cameraId
         organizationName
+        slot
         licensePlateNum
         status
-        checkIn
-        checkOut
-        id
         car {
       licensePlateNum
       userId
+      username
       carMaker
       carModel
       color
       year
-   
+
     }
+        checkIn
+        checkOut
         created_at
         updated_at
+        id
         __typename
       }
       nextToken
@@ -50,8 +103,8 @@ export const getTicketsByLicensePlateNumber =
     }
   }
   ` as GeneratedQuery<
-    APITypes.TicketsByLicensePlateNumQueryVariables,
-    APITypes.TicketsByLicensePlateNumQuery
+    APITypes.TicketsByCameraIdAndCreated_atQueryVariables,
+    APITypes.TicketsByCameraIdAndCreated_atQuery
   >;
 
 export const customListTickets = /* GraphQL */ `query CustomListTickets(
@@ -73,7 +126,7 @@ export const customListTickets = /* GraphQL */ `query CustomListTickets(
       carModel
       color
       year
-   
+
     }
         licensePlateNum
         status

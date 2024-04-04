@@ -262,9 +262,9 @@ export const getTickets = /* GraphQL */ `query GetTickets($id: ID!) {
     status
     checkIn
     checkOut
-    id
     created_at
     updated_at
+    id
     __typename
   }
 }
@@ -287,9 +287,9 @@ export const listTickets = /* GraphQL */ `query ListTickets(
       status
       checkIn
       checkOut
-      id
       created_at
       updated_at
+      id
       __typename
     }
     nextToken
@@ -300,15 +300,17 @@ export const listTickets = /* GraphQL */ `query ListTickets(
   APITypes.ListTicketsQueryVariables,
   APITypes.ListTicketsQuery
 >;
-export const ticketsByLicensePlateNum = /* GraphQL */ `query TicketsByLicensePlateNum(
-  $licensePlateNum: String!
+export const ticketsByCameraIdAndCreated_at = /* GraphQL */ `query TicketsByCameraIdAndCreated_at(
+  $cameraId: String!
+  $created_at: ModelStringKeyConditionInput
   $sortDirection: ModelSortDirection
   $filter: ModelTicketsFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  ticketsByLicensePlateNum(
-    licensePlateNum: $licensePlateNum
+  ticketsByCameraIdAndCreated_at(
+    cameraId: $cameraId
+    created_at: $created_at
     sortDirection: $sortDirection
     filter: $filter
     limit: $limit
@@ -323,9 +325,9 @@ export const ticketsByLicensePlateNum = /* GraphQL */ `query TicketsByLicensePla
       status
       checkIn
       checkOut
-      id
       created_at
       updated_at
+      id
       __typename
     }
     nextToken
@@ -333,6 +335,44 @@ export const ticketsByLicensePlateNum = /* GraphQL */ `query TicketsByLicensePla
   }
 }
 ` as GeneratedQuery<
-  APITypes.TicketsByLicensePlateNumQueryVariables,
-  APITypes.TicketsByLicensePlateNumQuery
+  APITypes.TicketsByCameraIdAndCreated_atQueryVariables,
+  APITypes.TicketsByCameraIdAndCreated_atQuery
+>;
+export const ticketsByLicensePlateNumAndCreated_at = /* GraphQL */ `query TicketsByLicensePlateNumAndCreated_at(
+  $licensePlateNum: String!
+  $created_at: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelTicketsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  ticketsByLicensePlateNumAndCreated_at(
+    licensePlateNum: $licensePlateNum
+    created_at: $created_at
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      ticketNum
+      cameraId
+      organizationName
+      slot
+      licensePlateNum
+      status
+      checkIn
+      checkOut
+      created_at
+      updated_at
+      id
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.TicketsByLicensePlateNumAndCreated_atQueryVariables,
+  APITypes.TicketsByLicensePlateNumAndCreated_atQuery
 >;

@@ -216,9 +216,9 @@ export const createTickets = /* GraphQL */ `mutation CreateTickets(
     status
     checkIn
     checkOut
-    id
     created_at
     updated_at
+    id
     __typename
   }
 }
@@ -251,9 +251,9 @@ export const updateTickets = /* GraphQL */ `mutation UpdateTickets(
     status
     checkIn
     checkOut
-    id
     created_at
     updated_at
+    id
     __typename
   }
 }
@@ -286,9 +286,9 @@ export const deleteTickets = /* GraphQL */ `mutation DeleteTickets(
     status
     checkIn
     checkOut
-    id
     created_at
     updated_at
+    id
     __typename
   }
 }

@@ -1,9 +1,10 @@
 import {
   ModelSubscriptionTicketsFilterInput,
   OnCreateTicketsSubscription,
+  OnUpdateTicketsSubscription,
   UpdateTicketsInput,
 } from '@/API';
-import { onCreateTickets } from '@/graphql/subscriptions';
+import { onCreateTickets, onUpdateTickets } from '@/graphql/subscriptions';
 import { generateClient, GraphQLSubscription } from 'aws-amplify/api';
 import { execute } from '../utils';
 import { updateTickets } from '@/graphql/mutations';
@@ -18,7 +19,20 @@ class TicketService {
       variables: {
         filter,
       },
-      authMode: 'iam',
+      authMode: 'userPool',
+    });
+  }
+
+  public onTicketUpdateSubscription(
+    filter: ModelSubscriptionTicketsFilterInput
+  ) {
+    const client = generateClient();
+    return client.graphql<GraphQLSubscription<OnUpdateTicketsSubscription>>({
+      query: onUpdateTickets,
+      variables: {
+        filter,
+      },
+      authMode: 'userPool',
     });
   }
 

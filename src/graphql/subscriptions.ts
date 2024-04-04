@@ -186,9 +186,9 @@ export const onCreateTickets = /* GraphQL */ `subscription OnCreateTickets($filt
     status
     checkIn
     checkOut
-    id
     created_at
     updated_at
+    id
     __typename
   }
 }
@@ -218,9 +218,9 @@ export const onUpdateTickets = /* GraphQL */ `subscription OnUpdateTickets($filt
     status
     checkIn
     checkOut
-    id
     created_at
     updated_at
+    id
     __typename
   }
 }
@@ -250,9 +250,9 @@ export const onDeleteTickets = /* GraphQL */ `subscription OnDeleteTickets($filt
     status
     checkIn
     checkOut
-    id
     created_at
     updated_at
+    id
     __typename
   }
 }

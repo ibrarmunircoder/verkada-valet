@@ -1,9 +1,11 @@
 'use client';
+import React, { useState } from 'react';
 import { TicketStatus, Tickets } from '@/API';
 import { Badge, Button } from '@aws-amplify/ui-react';
 import Image from 'next/image';
 import dayjs from 'dayjs';
-import React from 'react';
+import Swal from 'sweetalert2';
+import { ticketService } from '../services/ticket.service';
 
 type UserTicketCardProps = {
   ticket: Tickets;
@@ -11,9 +13,33 @@ type UserTicketCardProps = {
 };
 
 export const UserTicketCard = ({ ticket, onPickup }: UserTicketCardProps) => {
-  const handlePickup = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const handlePickup = async () => {
     if (onPickup) {
-      onPickup(ticket.id);
+      const toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      try {
+        setIsLoading(true);
+        const updatedTicket = await ticketService.editTicket({
+          status: TicketStatus.PICKEDUP,
+          checkOut: new Date().toISOString(),
+          id: ticket.id,
+        });
+        onPickup(updatedTicket.id);
+      } catch (error: any) {
+        console.error(error);
+        toast.fire({
+          icon: 'error',
+          title: error.message || 'Something went wrong!. Please try again.',
+          padding: '10px 20px',
+        });
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -75,6 +101,10 @@ export const UserTicketCard = ({ ticket, onPickup }: UserTicketCardProps) => {
           <span className="text-sm font-bold">Color:</span>
           <span>{ticket.car?.color}</span>
         </div>
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-bold">Slot:</span>
+          <span>{ticket.slot}</span>
+        </div>
         {ticket.status === TicketStatus.PICKEDUP && (
           <div className="flex items-center gap-3">
             <span className="text-sm font-bold">Status:</span>
@@ -82,7 +112,12 @@ export const UserTicketCard = ({ ticket, onPickup }: UserTicketCardProps) => {
           </div>
         )}
         {ticket.status === TicketStatus.IN_PARKING && (
-          <Button onClick={handlePickup} variation="primary" isFullWidth>
+          <Button
+            isLoading={isLoading}
+            onClick={handlePickup}
+            variation="primary"
+            isFullWidth
+          >
             Pickup
           </Button>
         )}

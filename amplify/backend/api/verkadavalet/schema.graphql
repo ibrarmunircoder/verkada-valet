@@ -72,14 +72,17 @@ type Tickets
     ]
   ) {
   ticketNum: String!
-  cameraId: String!
+  cameraId: String! @index(name: "byCamera", sortKeyFields: ["created_at"])
   organizationName: String!
   slot: Int
-  licensePlateNum: String! @index(name: "byCarLicensePlateNum")
+  licensePlateNum: String!
+    @index(name: "byCarLicensePlateNum", sortKeyFields: ["created_at"])
   car: Cars @belongsTo(fields: ["licensePlateNum"])
-  status: TicketStatus!
-  checkIn: AWSDateTime
+  status: TicketStatus! @default(value: "IN_PARKING")
+  checkIn: AWSDateTime!
   checkOut: AWSDateTime
+  created_at: AWSDateTime
+  updated_at: AWSDateTime
 }
 
 enum TicketStatus {
