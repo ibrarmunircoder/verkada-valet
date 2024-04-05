@@ -9,14 +9,19 @@ import { ticketService } from '../services/ticket.service';
 
 type UserTicketCardProps = {
   ticket: Tickets;
+  onRemove?: (ticketId: string) => void;
 };
 
-export const OrganizationTicketCard = ({ ticket }: UserTicketCardProps) => {
+export const OrganizationTicketCard = ({
+  ticket,
+  onRemove,
+}: UserTicketCardProps) => {
   const [formState, setFormState] = useState({
     slot: '',
   });
   const [ticketState, setTicketState] = useState<Tickets>(ticket);
   const [isLoading, setIsLoading] = useState(false);
+  const [isRemoving, setIsRemobingLoading] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
   const handleAddSlot = () => {
@@ -57,6 +62,36 @@ export const OrganizationTicketCard = ({ ticket }: UserTicketCardProps) => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleRemoveTicket = async () => {
+    const toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 3000,
+    });
+    try {
+      setIsRemobingLoading(true);
+      await ticketService.removeTicketById(ticket.id);
+      toast.fire({
+        icon: 'success',
+        title: 'Ticket removed successfully!',
+        padding: '10px 20px',
+      });
+    } catch (error: any) {
+      console.log(error);
+      toast.fire({
+        icon: 'error',
+        title: error.message || 'Something went wrong!. Please try again.',
+        padding: '10px 20px',
+      });
+    } finally {
+      if (onRemove) {
+        onRemove(ticket.id);
+      }
+      setIsRemobingLoading(false);
     }
   };
 
@@ -114,11 +149,15 @@ export const OrganizationTicketCard = ({ ticket }: UserTicketCardProps) => {
             </span>
           </div>
         )}
-
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-bold">License Plate:</span>
+          <span>{ticketState.car?.licensePlateNum}</span>
+        </div>
         <div className="flex items-center gap-3">
           <span className="text-sm font-bold">Color:</span>
           <span>{ticketState.car?.color}</span>
         </div>
+
         <div className="flex items-center gap-3">
           <span className="text-sm font-bold">Slot:</span>
           {isEdit ? (
@@ -148,14 +187,27 @@ export const OrganizationTicketCard = ({ ticket }: UserTicketCardProps) => {
           </div>
         )}
         {ticketState.status === TicketStatus.IN_PARKING && (
-          <Button
-            isLoading={isLoading}
-            onClick={isEdit ? handleUpdateTicketSlot : handleAddSlot}
-            variation="primary"
-            isFullWidth
-          >
-            {isEdit ? 'Save' : 'Add Slot'}
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              isLoading={isLoading}
+              onClick={isEdit ? handleUpdateTicketSlot : handleAddSlot}
+              variation="primary"
+              isFullWidth
+            >
+              {isEdit ? 'Save' : 'Add Slot'}
+            </Button>
+            {ticket.status === TicketStatus.IN_PARKING && (
+              <Button
+                isLoading={isRemoving}
+                onClick={handleRemoveTicket}
+                variation="primary"
+                colorTheme="error"
+                isFullWidth
+              >
+                Remove
+              </Button>
+            )}
+          </div>
         )}
       </div>
     </div>

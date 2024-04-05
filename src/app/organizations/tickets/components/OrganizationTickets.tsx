@@ -79,11 +79,22 @@ export const OrganizationTickets = ({ tickets, camera }: UserTicketsProps) => {
     );
   }
 
+  const handleOnRemove = (ticketId: string) => {
+    setNewTickets((prev) => {
+      const newTickets = [...prev].filter((t) => t.id !== ticketId);
+      return newTickets;
+    });
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-3">
         {newTickets.map((ticket) => (
-          <OrganizationTicketCard key={ticket.id} ticket={ticket} />
+          <OrganizationTicketCard
+            key={ticket.id}
+            ticket={ticket}
+            onRemove={handleOnRemove}
+          />
         ))}
       </div>
     </>

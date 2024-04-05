@@ -7,7 +7,8 @@ import {
 import { onCreateTickets, onUpdateTickets } from '@/graphql/subscriptions';
 import { generateClient, GraphQLSubscription } from 'aws-amplify/api';
 import { execute } from '../utils';
-import { updateTickets } from '@/graphql/mutations';
+import { deleteTickets, updateTickets } from '@/graphql/mutations';
+import { getTickets } from '@/graphql/queries';
 
 class TicketService {
   public onTicketCreateSubscription(
@@ -48,6 +49,40 @@ class TicketService {
     );
 
     return ticket;
+  }
+
+  public async getTicketById(id: string) {
+    const ticket = await execute(
+      {
+        statement: getTickets,
+        name: 'getTickets',
+      },
+      {
+        id,
+      }
+    );
+    return ticket;
+  }
+
+  public async removeTicketById(id: string) {
+    const ticket = await this.getTicketById(id);
+    if (!ticket) {
+      throw new Error('Ticket does not exist anymore!');
+    }
+
+    const deletedTicket = await execute(
+      {
+        statement: deleteTickets,
+        name: 'deleteTickets',
+      },
+      {
+        input: {
+          id,
+        },
+      }
+    );
+
+    return deletedTicket;
   }
 }
 

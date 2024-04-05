@@ -10,10 +10,16 @@ import { ticketService } from '../services/ticket.service';
 type UserTicketCardProps = {
   ticket: Tickets;
   onPickup?: (ticketId: string) => void;
+  onRemove?: (ticketId: string) => void;
 };
 
-export const UserTicketCard = ({ ticket, onPickup }: UserTicketCardProps) => {
+export const UserTicketCard = ({
+  ticket,
+  onPickup,
+  onRemove,
+}: UserTicketCardProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isRemoving, setIsRemobingLoading] = useState(false);
   const handlePickup = async () => {
     if (onPickup) {
       const toast = Swal.mixin({
@@ -40,6 +46,36 @@ export const UserTicketCard = ({ ticket, onPickup }: UserTicketCardProps) => {
       } finally {
         setIsLoading(false);
       }
+    }
+  };
+
+  const handleRemoveTicket = async () => {
+    const toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 3000,
+    });
+    try {
+      setIsRemobingLoading(true);
+      await ticketService.removeTicketById(ticket.id);
+      toast.fire({
+        icon: 'success',
+        title: 'Ticket removed successfully!',
+        padding: '10px 20px',
+      });
+    } catch (error: any) {
+      console.log(error);
+      toast.fire({
+        icon: 'error',
+        title: error.message || 'Something went wrong!. Please try again.',
+        padding: '10px 20px',
+      });
+    } finally {
+      if (onRemove) {
+        onRemove(ticket.id);
+      }
+      setIsRemobingLoading(false);
     }
   };
 
@@ -98,6 +134,10 @@ export const UserTicketCard = ({ ticket, onPickup }: UserTicketCardProps) => {
           </div>
         )}
         <div className="flex items-center gap-3">
+          <span className="text-sm font-bold">License Plate:</span>
+          <span>{ticket.car?.licensePlateNum}</span>
+        </div>
+        <div className="flex items-center gap-3">
           <span className="text-sm font-bold">Color:</span>
           <span>{ticket.car?.color}</span>
         </div>
@@ -112,14 +152,25 @@ export const UserTicketCard = ({ ticket, onPickup }: UserTicketCardProps) => {
           </div>
         )}
         {ticket.status === TicketStatus.IN_PARKING && (
-          <Button
-            isLoading={isLoading}
-            onClick={handlePickup}
-            variation="primary"
-            isFullWidth
-          >
-            Pickup
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              isLoading={isLoading}
+              onClick={handlePickup}
+              variation="primary"
+              isFullWidth
+            >
+              Pickup
+            </Button>
+            <Button
+              isLoading={isRemoving}
+              onClick={handleRemoveTicket}
+              variation="primary"
+              colorTheme="error"
+              isFullWidth
+            >
+              Remove
+            </Button>
+          </div>
         )}
       </div>
     </div>
