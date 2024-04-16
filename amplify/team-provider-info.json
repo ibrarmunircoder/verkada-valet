@@ -22,7 +22,11 @@
       "function": {
         "verkadavalet747f2d4c": {
           "deploymentBucketName": "amplify-verkadavalet-production-121857-deployment",
-          "s3Key": "amplify-builds/verkadavalet747f2d4c-4469736e4e304238412b-build.zip"
+          "s3Key": "amplify-builds/verkadavalet747f2d4c-69727a586e4c5a704b65-build.zip"
+        },
+        "verkadavaletb0878683": {
+          "deploymentBucketName": "amplify-verkadavalet-production-121857-deployment",
+          "s3Key": "amplify-builds/verkadavaletb0878683-395659476a326a4b3569-build.zip"
         }
       }
     }

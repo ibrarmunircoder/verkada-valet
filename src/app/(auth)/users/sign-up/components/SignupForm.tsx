@@ -59,7 +59,7 @@ export const SignupForm = () => {
               htmlFor="firstName"
               className="text-lg font-normal mb-2 inline-block"
             >
-              Frist Name
+              First Name
             </label>
             <Controller
               control={control}

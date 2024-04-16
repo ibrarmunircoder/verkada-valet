@@ -63,7 +63,7 @@ type Tickets
   @auth(
     rules: [
       { allow: public, operations: [read, create], provider: iam }
-      { allow: private, operations: [read, create], provider: iam }
+      { allow: private, operations: [read, create, delete], provider: iam }
       {
         allow: private
         operations: [create, update, delete, read]

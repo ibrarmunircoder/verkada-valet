@@ -16,6 +16,7 @@ export const UserTickets = ({ tickets, car }: UserTicketsProps) => {
 
   useEffect(() => {
     let sub: any;
+    let sub1: any;
     if (car) {
       sub = ticketService
         .onTicketCreateSubscription({
@@ -32,11 +33,28 @@ export const UserTickets = ({ tickets, car }: UserTicketsProps) => {
           },
           error: (error) => console.log(error),
         });
+
+      sub1 = ticketService
+        .onTicketDeleteSubscription({
+          licensePlateNum: { eq: car.licensePlateNum },
+        })
+        .subscribe({
+          next: async ({ data }) => {
+            const ticket = data.onDeleteTickets as Tickets;
+            setNewTickets((prev) => [
+              ...prev.filter((tick) => tick.id !== ticket.id),
+            ]);
+          },
+          error: (error) => console.log(error),
+        });
     }
 
     return () => {
       if (sub) {
         sub.unsubscribe();
+      }
+      if (sub1) {
+        sub1.unsubscribe();
       }
     };
   }, [car]);

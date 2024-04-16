@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "verkadavalet747f2d4c"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "verkadavaletb0878683"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -86,6 +94,21 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "verkadavaletb0878683": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "verkadavalet"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -102,6 +125,22 @@
         {
           "category": "function",
           "resourceName": "verkadavalet747f2d4c"
+        }
+      ]
+    },
+    "AMPLIFY_function_verkadavaletb0878683_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "verkadavaletb0878683"
+        }
+      ]
+    },
+    "AMPLIFY_function_verkadavaletb0878683_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "verkadavaletb0878683"
         }
       ]
     }

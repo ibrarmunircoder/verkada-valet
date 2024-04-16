@@ -7,6 +7,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/verkada/remove-ticket-webhook": {
+      "name": "/verkada/remove-ticket-webhook",
+      "lambdaFunction": "verkadavaletb0878683",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

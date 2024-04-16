@@ -16,6 +16,7 @@ export const OrganizationTickets = ({ tickets, camera }: UserTicketsProps) => {
 
   useEffect(() => {
     let sub: any;
+    let sub1: any;
     if (camera) {
       sub = ticketService
         .onTicketCreateSubscription({
@@ -32,11 +33,28 @@ export const OrganizationTickets = ({ tickets, camera }: UserTicketsProps) => {
           },
           error: (error) => console.log(error),
         });
+
+      sub1 = ticketService
+        .onTicketDeleteSubscription({
+          cameraId: { eq: camera.cameraId },
+        })
+        .subscribe({
+          next: async ({ data }) => {
+            const ticket = data.onDeleteTickets as Tickets;
+            setNewTickets((prev) => [
+              ...prev.filter((tick) => tick.id !== ticket.id),
+            ]);
+          },
+          error: (error) => console.log(error),
+        });
     }
 
     return () => {
       if (sub) {
         sub.unsubscribe();
+      }
+      if (sub1) {
+        sub1.unsubscribe();
       }
     };
   }, [camera]);
